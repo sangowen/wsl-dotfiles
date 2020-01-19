@@ -1,5 +1,5 @@
 # wsl-dotfiles
-![](https://imgur.com/YMcz1pq)
+![](https://i.imgur.com/YMcz1pq.mp4)
 Currently this repo only includes dotfiles related to using i3wm as an IDE.
 
 The whole desktop env. looks like:
