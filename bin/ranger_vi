@@ -1,0 +1,51 @@
+#!/bin/bash
+set -m
+export GOPATH="/home/wayne/go"
+VI_LIST=$(vim --serverlist)
+if [ "$VI_LIST" = "RANGER" ]; then
+
+  # VIM already exists
+  if [ "$1" = "tab" ]; then
+    vim --servername ranger --remote-send "<c-c>:tabe $2<CR>"
+  elif [ "$1" = "vs" ]; then
+    vim --servername ranger --remote-send "<c-c>:vs $2<CR>"
+  elif [ "$1" = "sp" ]; then
+    vim --servername ranger --remote-send "<c-c>:sp $2<CR>"
+  elif [ "$1" = "edit" ]; then
+    vim --servername ranger --remote-send "<c-c>:e $2<CR>"
+  fi
+  if [ "$#" -ne 2 ]; then
+    if [ "$1" = "sp" ]; then
+      for i in ${@:3}
+      do
+        vim --servername ranger --remote-send "<c-c>:sp $i<CR>"
+      done
+    elif [ "$1" = "edit" ]; then
+      # "Edit in current buffer" should only take one file.
+      echo -n;
+    else
+      for i in ${@:3}
+      do
+        vim --servername ranger --remote-send "<c-c>:vs $i<CR>"
+      done
+    fi
+  fi
+  i3-msg '[con_mark="v"] focus' >/dev/null
+
+else
+
+  # no existing VIM
+  ZSH_LIST=$(i3-msg '[con_mark="z"] focus' 2>/dev/null | jq .[0].success)
+
+  #TODO: support split & tabedit for multiple files when vim server doesn't exist
+  if [ "$ZSH_LIST" = "false" ]; then
+    # no existing ZSH
+    i3-msg '[con_mark="r"] focus parent' >/dev/null
+    exec /usr/bin/urxvt -g 153x50 -name ranger_urxvt_vim_base -e \
+      vim -c 'nnoremap qq :qa <cr>' --servername ranger -O ${@:2} 2>/dev/null &
+  else
+    # ZSH already exists
+    exec /usr/bin/urxvt -g 153x50 -name ranger_urxvt_vim_later -e \
+      vim -c 'nnoremap qq :qa <cr>' --servername ranger -O ${@:2} 2>/dev/null &
+  fi
+fi

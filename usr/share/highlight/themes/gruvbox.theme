@@ -1,0 +1,21 @@
+-- Wayne
+Description="Wayne Gruvbox"
+Default        = { Colour="#ebdbb2" }
+Canvas         = { Colour="#282828" }
+Number         = { Colour="#8ec07c" }
+Escape         = { Colour="#fe8019" }
+String         = { Colour="#b8bb26" }
+StringPreProc  = { Colour="#b8bb26" }
+BlockComment   = { Colour="#928374", Italic=true }
+PreProcessor   = { Colour="#b8bb26" }
+LineNum        = { Colour="#928374" }
+Operator       = { Colour="#ebdbb2" }
+LineComment = BlockComment
+Interpolation  = { Colour="#fe8019" }
+
+Keywords = {
+  { Colour= "#d75f5f" },
+  { Colour= "#d3869b" },
+  { Colour= "#458588", Bold=true },
+  { Colour= "#b8bb26", Bold=true },
+}

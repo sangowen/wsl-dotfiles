@@ -1,0 +1,31 @@
+#!/bin/bash
+stty -ixon
+GOPATH=/home/wayne/go
+GOROOT=/usr/local/go
+PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+
+VI_LIST=$(vim --serverlist)
+ZSH_LIST=$(tmux ls 2>/dev/null | grep ranger | awk '{print $1}')
+if [ "$VI_LIST" = "RANGER" ] || [ -n "$ZSH_LIST" ]; then
+  /usr/local/bin/ranger \
+    --cmd="enter_bookmark '" \
+    --cmd="set column_ratios 2,1" \
+    --cmd="set preview_files false" $@
+else
+  /usr/local/bin/ranger \
+    --cmd="enter_bookmark '" \
+    --cmd="set column_ratios 1,4" $@
+fi
+
+# most part of the layout moved to i3/config
+# i3-msg '[instance="^ranger_ide$"] mark r, focus, layout toggle split' >/dev/null 2>&1
+# only toggle split when starting, not when restarting i3
+# i3-msg '[instance="^ranger_ide$"] layout toggle split' >/dev/null 2>&1
+
+# if [ "$1" = "go" ]; then
+# 2019/01/15/16.39.36
+# --cmd='cd' seems to break ranger mark function atm
+#   /usr/local/bin/ranger --cmd='set column_ratios 3,5' --cmd='cd /home/wayne/go/src'
+# else
+#  /usr/local/bin/ranger --cmd='set column_ratios 3,5'
+# fi

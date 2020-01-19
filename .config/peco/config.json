@@ -1,0 +1,44 @@
+{
+  "Prompt": "[peco]",
+	"Action": {
+		"selectVisibleAndFinish": [
+			"peco.SelectVisible",
+			"peco.Finish"
+		],
+		"scrollFiveUp": [
+			"peco.SelectUp",
+			"peco.SelectUp",
+			"peco.SelectUp",
+			"peco.SelectUp",
+			"peco.SelectUp"
+		],
+		"scrollFiveDown": [
+			"peco.SelectDown",
+			"peco.SelectDown",
+			"peco.SelectDown",
+			"peco.SelectDown",
+			"peco.SelectDown"
+		]
+	},
+	"Keymap": {
+		"C-v": "peco.ToggleRangeMode",
+		"C-j": "peco.SelectDown",
+		"C-k": "peco.SelectUp",
+		"C-a": "selectVisibleAndFinish",
+		"C-h": "peco.ScrollLeft",
+		"C-l": "peco.ScrollRight",
+		"C-g,C-g": "peco.ScrollFirstItem",
+		"S-g": "peco.ScrollLastItem",
+		"C-u": "scrollFiveUp",
+		"C-d": "scrollFiveDown",
+		"C-s": "peco.ToggleSingleKeyJump"
+	},
+	"OnCancel": "error",
+  "StickySelection": true,
+  "Style": {
+    "Basic": ["on_default", "default"],
+    "SavedSelection": ["on_cyan", "black"],
+    "Selected": ["on_magenta", "black"],
+    "Matched": ["yellow"]
+  }
+}
