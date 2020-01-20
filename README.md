@@ -23,6 +23,7 @@ What it can do:
 * layout is persistent through i3 restart
 * etc...
 ## Requirement
+* i3-gaps
 * ranger
 * vim
   * (optional) ctrlp
