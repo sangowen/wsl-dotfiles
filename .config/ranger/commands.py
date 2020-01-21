@@ -94,6 +94,28 @@ class vim(Command):
         return [getattr(item, attr) for item in
                 self.fm.thistab.get_selection()]
 
+class nvim(Command):
+    """
+    :nvim
+
+    open nvim
+    """
+
+    def execute(self):
+        import subprocess
+        selection = self.get_selection_attr('path')
+        if not os.path.isdir(selection[0]):
+            selection.insert(0, '/home/wayne/bin/ranger_nvim')
+            selection.insert(1, self.arg(1))
+        else:
+            selection[0] = '/home/wayne/bin/ranger_nvim'
+            selection.insert(1, self.arg(1))
+        subprocess.Popen(selection)
+
+    def get_selection_attr(self, attr):
+        return [getattr(item, attr) for item in
+                self.fm.thistab.get_selection()]
+
 class peco_open_popup(Command):
     """
     :peco_open_popup
