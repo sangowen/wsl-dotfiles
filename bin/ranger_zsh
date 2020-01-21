@@ -4,8 +4,9 @@ ZSH_LIST=$(i3-msg '[con_mark="z"] focus' 2>/dev/null | jq .[0].success)
 if [ "$ZSH_LIST" = "false" ]; then
 
   # no existing ZSH
-  VI_LIST=$(vim --serverlist)
-  if [ "$VI_LIST" = "RANGER" ]; then
+  # VI_LIST=$(vim --serverlist)
+  VI_LIST=$(/home/wayne/.local/bin/nvr --serverlist)
+  if [ "$VI_LIST" = "/tmp/nvimsocket" ]; then
     # VIM already exists
     i3-msg '[con_mark="v"] focus' >/dev/null
     urxvt -name ranger_urxvt_zsh_later -e /usr/bin/tmux new -A -s ranger  2>/dev/null &

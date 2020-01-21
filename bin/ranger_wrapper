@@ -4,7 +4,8 @@ GOPATH=/home/wayne/go
 GOROOT=/usr/local/go
 PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 
-VI_LIST=$(vim --serverlist)
+# VI_LIST=$(vim --serverlist)
+VI_LIST=$(/home/wayne/.local/bin/nvr --serverlist)
 ZSH_LIST=$(tmux ls 2>/dev/null | grep ranger | awk '{print $1}')
 if [ "$VI_LIST" = "RANGER" ] || [ -n "$ZSH_LIST" ]; then
   /usr/local/bin/ranger \

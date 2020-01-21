@@ -25,7 +25,8 @@ What it can do:
 ## Requirement
 * i3-gaps
 * ranger
-* vim
+* neovim
+  * nvr
   * (optional) ctrlp
 * zsh
 * urxvt
@@ -67,7 +68,7 @@ mod+': Goto mode (single char)
 mod+hjkl: focus left, down, up, right
 ```
 
-### vim
+### neovim
 Related files: bin/ranger_vi, .vimrc
 
 ```

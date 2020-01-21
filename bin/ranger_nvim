@@ -1,0 +1,56 @@
+#!/bin/bash
+set -m
+export GOPATH="/home/wayne/go"
+NVIM_SOCKET=$(/home/wayne/.local/bin/nvr --serverlist)
+if [ "$NVIM_SOCKET" = "/tmp/nvimsocket" ]; then
+
+  # VIM already exists
+  if [ "$1" = "tab" ]; then
+    /home/wayne/.local/bin/nvr -p $2
+  elif [ "$1" = "vs" ]; then
+    /home/wayne/.local/bin/nvr -O $2
+  elif [ "$1" = "sp" ]; then
+    /home/wayne/.local/bin/nvr -o $2
+  elif [ "$1" = "edit" ]; then
+    /home/wayne/.local/bin/nvr $2
+  fi
+  if [ "$#" -ne 2 ]; then
+    if [ "$1" = "sp" ]; then
+      /home/wayne/.local/bin/nvr -o ${@:3}
+    elif [ "$1" = "edit" ]; then
+      # "Edit in current buffer" should only take one file.
+      echo -n;
+    else
+      /home/wayne/.local/bin/nvr -O ${@:3}
+    fi
+  fi
+  i3-msg '[con_mark="v"] focus' >/dev/null
+
+else
+
+  # no existing VIM
+  ZSH_LIST=$(i3-msg '[con_mark="z"] focus' 2>/dev/null | jq .[0].success)
+
+  #TODO: support split for multiple files when vim server doesn't exist
+  export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+  if [ "$ZSH_LIST" = "false" ]; then
+    # no existing ZSH
+    i3-msg '[con_mark="r"] focus parent' >/dev/null
+    if [ "$1" = "sp" ]; then
+      exec /usr/bin/urxvt -g 153x50 -name ranger_urxvt_vim_base -e \
+        nvim -c 'nnoremap qq :qa <cr>' -o ${@:2}
+    else
+      exec /usr/bin/urxvt -g 153x50 -name ranger_urxvt_vim_base -e \
+        nvim -c 'nnoremap qq :qa <cr>' -O ${@:2}
+    fi
+  else
+    # ZSH already exists
+    if [ "$1" = "sp" ]; then
+      exec /usr/bin/urxvt -g 153x50 -name ranger_urxvt_vim_later -e \
+        nvim -c 'nnoremap qq :qa <cr>' -o ${@:2}
+    else
+      exec /usr/bin/urxvt -g 153x50 -name ranger_urxvt_vim_later -e \
+        nvim -c 'nnoremap qq :qa <cr>' -O ${@:2}
+    fi
+  fi
+fi
