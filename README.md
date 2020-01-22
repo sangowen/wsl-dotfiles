@@ -32,6 +32,7 @@ What it can do:
 * urxvt
 * tmux
 * jq
+* xdotool
 * (optional) fasd
 * (optional) peco
 * (optional) fzf
