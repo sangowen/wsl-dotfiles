@@ -1,7 +1,7 @@
 #!/bin/bash
 set -m
 rm /tmp/nopecresult
-CTRLP_FILE=$(cat /home/wayne/.cache/ctrlp/mru/cache.txt | /home/wayne/bin/pec)
+CTRLP_FILE=$(cat /home/wayne/.cache/ctrlp/mru/cache.txt | /home/wayne/bin/peco --layout bottom-up --prompt [ctrlp])
 i3-msg 'move scratchpad'
 if [ -n "$CTRLP_FILE" ]; then
   /home/wayne/bin/ranger_vi tab $CTRLP_FILE &

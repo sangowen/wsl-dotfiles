@@ -23,6 +23,7 @@ set $workspace4 "4<span size=\\"x-large\\" font_weight=\\"light\\"></span>4"
 set $workspacewin1 "11<span size=\\"x-large\\" font_weight=\\"bold\\"></span>1"
 set $workspacewin2 "12<span size=\\"x-large\\" font_weight=\\"bold\\"></span>2"
 set $workspacewin3 "13<span size=\\"x-large\\" font_weight=\\"bold\\"></span>3"
+set $workspacewin4 "14<span size=\\"x-large\\" font_weight=\\"bold\\"></span>4"
 
 font pango:Meslo LG S for Powerline
 
@@ -60,6 +61,11 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod_win+h focus left
+bindsym $mod_win+j focus down
+bindsym $mod_win+k focus up
+bindsym $mod_win+l focus right
+bindsym $mod_win+apostrophe focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -130,6 +136,7 @@ bindsym $mod+3 workspace $workspace3
 bindsym $mod_win+1 workspace $workspacewin1
 bindsym $mod_win+2 workspace $workspacewin2
 bindsym $mod_win+3 workspace $workspacewin3
+bindsym $mod_win+4 workspace $workspacewin4
 bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace number 5
 bindsym $mod+6 workspace number 6
@@ -146,6 +153,7 @@ bindsym $mod+Shift+3 move container to workspace number $workspace3
 bindsym $mod_win+Shift+1 move container to workspace number $workspacewin1
 bindsym $mod_win+Shift+2 move container to workspace number $workspacewin2
 bindsym $mod_win+Shift+3 move container to workspace number $workspacewin3
+bindsym $mod_win+Shift+4 move container to workspace number $workspacewin4
 bindsym $mod+Shift+4 move container to workspace number $workspace4
 bindsym $mod+Shift+5 move container to workspace number 5
 bindsym $mod+Shift+6 move container to workspace number 6
@@ -161,9 +169,10 @@ bindsym $mod+Control+3 move container to workspace number $workspace3; workspace
 bindsym $mod_win+Control+1 move container to workspace number $workspacewin1; workspace number 11
 bindsym $mod_win+Control+2 move container to workspace number $workspacewin2; workspace number 12
 bindsym $mod_win+Control+3 move container to workspace number $workspacewin3; workspace number 13
-bindsym $mod+Control+4 move container to workspace number $workspacewin1; workspace number 4
-bindsym $mod+Control+5 move container to workspace number $workspacewin2; workspace number 5
-bindsym $mod+Control+6 move container to workspace number $workspacewin3; workspace number 6
+bindsym $mod_win+Control+4 move container to workspace number $workspacewin4; workspace number 14
+bindsym $mod+Control+4 move container to workspace number 4; workspace number 4
+bindsym $mod+Control+5 move container to workspace number 5; workspace number 5
+bindsym $mod+Control+6 move container to workspace number 6; workspace number 6
 bindsym $mod+Control+7 move container to workspace number 7; workspace number 7
 bindsym $mod+Control+8 move container to workspace number 8; workspace number 8
 bindsym $mod+Control+9 move container to workspace number 9; workspace number 9
@@ -294,6 +303,8 @@ bar {
   }
 }
 
+focus_on_window_activation none
+
 for_window [instance="^gcin-tools$"] floating enable
 for_window [class=".*"] border pixel 3
 
@@ -335,12 +346,9 @@ for_window [class="^insync.py$"] floating enable, \
   move up 317px, move right 710px, focus
 
 # Ranger
-for_window [instance="^ranger_urxvt_(vim|zsh)_base$" title="^((?!RANGER|wayne).)*$"] \
+for_window [instance="^ranger_urxvt_(vim|zsh)_base$" title="^((?!RANGER|tmux).)*$"] \
   resize set 80 ppt, \
   split h, layout tabbed
-  # gaps inner current set 0,\
-  # gaps vertical current set 15,\
-  # gaps horizontal current set 5,\
 
 for_window [instance="ranger_urxvt_vim"] \
   mark v
@@ -349,11 +357,11 @@ for_window [instance="ranger_urxvt_zsh"] \
   mark z
 
 for_window [instance="ranger_urxvt_vim_later"] \
-  border normal, \
   [con_mark="z"] move container to mark v
+  # border normal, \
 
-for_window [instance="ranger_urxvt_zsh_later"] \
-  border normal
+# for_window [instance="ranger_urxvt_zsh_later"] \
+#   border normal
 
 for_window [instance="^ranger_ide$"] \
   mark r, focus, \
@@ -373,8 +381,7 @@ for_window [title="tty-clock"] \
 for_window [instance="^spt$"] \
   mark s, \
   move container to workspace number $workspacewin1, \
-  move container left, \
-  split h, layout tabbed
+  move container left
 
 for_window [instance="^cmus$"] \
   mark c, \
@@ -384,6 +391,7 @@ for_window [instance="^cmus$"] \
 for_window [instance="^neomutt$"] \
   mark n, \
   move container to workspace number $workspacewin2, \
+  move container right, \
   move container right
   # move container right, \
   # [con_mark="n"] move container to mark w, \
@@ -413,7 +421,7 @@ for_window [class="^Microsoft Teams - Preview$"] \
   move container to workspace number $workspacewin2
 
 for_window [class="^Spotify$"] \
-  move container to workspace number $workspacewin2 \
+  move container to workspace number $workspacewin1 \
   move container left
 
 # workspace_auto_back_and_forth yes
@@ -561,6 +569,8 @@ bindsym $mod+apostrophe mode "Goto"
 
 bindsym $mod+n workspace next_on_output
 bindsym $mod+p workspace prev_on_output
+bindsym $mod_win+n workspace next_on_output
+bindsym $mod_win+p workspace prev_on_output
 
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
@@ -572,7 +582,7 @@ bindsym $mod+Shift+x exec "/home/wayne/clipster/clipster -sp"
 
 # map capslock to ctrl
 exec --no-startup-id "xmodmap ~/.Xmodmap"
-# exec --no-startup-id "xrandr --output $primary_output --mode 1920x1080; xrandr --output $third_output --mode 1920x515 --below $primary_output"
+
 # disable ctrl+s for freezing terminals
 exec --no-startup-id stty -ixon
 exec --no-startup-id gcin
