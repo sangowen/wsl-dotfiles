@@ -346,7 +346,7 @@ for_window [class="^insync.py$"] floating enable, \
   move up 317px, move right 710px, focus
 
 # Ranger
-for_window [instance="^ranger_urxvt_(vim|zsh)_base$" title="^((?!Ranger|tmux).)*$"] \
+for_window [instance="^ranger_urxvt_(vim|zsh)_base$" title="^((?!RANGER|tmux).)*$"] \
   resize set 80 ppt, \
   split h, layout tabbed
 
