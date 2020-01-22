@@ -13,7 +13,7 @@ if [ "$ZSH_LIST" = "false" ]; then
   else
     # no existing VIM
     i3-msg 'focus parent' > /dev/null
-    urxvt -name ranger_urxvt_zsh_base -e /usr/bin/tmux new -A -s ranger 2>/dev/null &
+    urxvt -name ranger_urxvt_zsh_base -title Loading... -e /home/wayne/bin/load_tmux 2>/dev/null &
   fi
 
 else

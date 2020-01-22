@@ -344,12 +344,9 @@ for_window [class="^insync.py$"] floating enable, \
   move up 317px, move right 710px, focus
 
 # Ranger
-for_window [instance="^ranger_urxvt_(vim|zsh)_base$" title="^((?!RANGER|wayne).)*$"] \
+for_window [instance="^ranger_urxvt_(vim|zsh)_base$" title="^((?!RANGER|tmux).)*$"] \
   resize set 80 ppt, \
   split h, layout tabbed
-  # gaps inner current set 0,\
-  # gaps vertical current set 15,\
-  # gaps horizontal current set 5,\
 
 for_window [instance="ranger_urxvt_vim"] \
   mark v
