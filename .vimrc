@@ -121,6 +121,7 @@ set splitright
 set splitbelow
 let mapleader = ","
 
+set title
 if $RANGER_LEVEL == 1
   nnoremap qq :qa<cr>
   nnoremap qa :qa<cr>
@@ -216,12 +217,12 @@ autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
 "Let vim Recongnize alt key
 "	tmux.conf: set -sg escape-time 0
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "nmap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
+" let c='a'
+" while c <= 'z'
+"   exec "set <A-".c.">=\e".c
+"   exec "nmap \e".c." <A-".c.">"
+"   let c = nr2char(1+char2nr(c))
+" endw
 set ttimeout ttimeoutlen=10
 "nnoremap <M-p> :CtrlPCmdPalette<cr>
 "nnoremap <M-n> :NERDTreeToggle<cr>
