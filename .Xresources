@@ -1,0 +1,164 @@
+rofi.theme: /usr/share/rofi/themes/gruvbox-dark-soft.rasi
+rofi.sidebar-mode: true
+rofi.modi: combi
+rofi.combi-modi: window,run,ssh
+rofi.terminal: urxvt
+rofi.ssh-client: ssh
+rofi.ssh-command: {terminal} -e {ssh-client} {host}
+rofi.search-mode: true
+
+rofi.kb-accept-entry: Control+m,Return,KP_Enter
+rofi.kb-row-down: Control+j,Down,Control+n
+rofi.kb-remove-char-forward: Delete
+rofi.kb-remove-to-eol: Control+d
+rofi.kb-row-up: Up,Control+p,Control+k,ISO_Left_Tab
+rofi.kb-remove-word-back: Control+w
+rofi.kb-clear-line: Control+D
+rofi.kb-move-char-back: Left
+rofi.kb-move-char-forward: Right
+rofi.kb-move-word-back: Control+b
+rofi.kb-move-word-forward: Control+f
+
+! URxvt.perl-ext-common: default,xresources-256,keyboard-select,matcher
+URxvt.perl-ext-common: default,xresources-256,keyboard-select,url-select,notify,unichr,resize-font,matcher
+URxvt*.termName: rxvt-unicode-256color
+URxvt*imLocale: en_US.UTF-8
+! URxvt.perl-ext: tabbed
+! URxvt.perl-lib: /home/wayne/.urxvt/tabbed
+
+
+! Tabbed extension configuration
+! URxvt.tabbed.autohide: true
+! URxvt.tabbed.tabbar-fg: 8
+! URxvt.tabbed.tabbar-bg: 0
+! URxvt.tabbed.tab-fg:    15
+! URxvt.tabbed.tab-bg:    8
+! URxvt.tabbed.new-button: false
+! URxvt.tabbed.tabcmds.1: N|shell
+! URxvt.tabbed.tabcmds.2: R|root|su -
+! URxvt.tabbed.tabcmds.3: M|mc|mc
+
+
+! UI
+! URxvt.letterSpace: -1
+URxvt.letterSpace: 0
+! 180711 working
+URxvt*font: xft:Meslo LG S DZ for Powerline:size=12:antialias=true,xft:MesloLGS Nerd Font Mono:size=12:antialias=true:minspace=False,xft:Noto Emoji:size=12:minspace=False:antialias=false,-*-unifont-*-*-*-*-*-*-*-*-*-*-*-*:pixelsize=18,xft:WenQuanYi Micro Hei Mono:size=18
+
+
+! URxvt*font: xft:Noto Emoji:minspace=False
+URxvt.scrollBar: false
+URxvt*scrollTtyOutput: false
+URxvt*scrollTtyKeypress: true
+URxvt.saveLines: 20000
+! URxvt.tripleclickwords: true
+
+! https://github.com/muennich/urxvt-perls keyboard-select
+! URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-grave: perl:keyboard-select:activate
+URxvt.keyboard-select.clipboard: true
+! URxvt.keysym.M-s: perl:keyboard-select:search ! conflict with i3 stack view
+! url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.underline: true
+
+
+! remap c-s-v, c-s-c
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.keysym.Shift-M-V: eval:paste_primary
+
+! extension: matcher
+! sensible-browers seems to be the same with x-www-browser set by update-alternative
+URxvt.url-launcher: sensible-browser
+! URxvt.url-launcher: /usr/bin/firefox
+URxvt.keysym.C-Delete:    perl:matcher:last
+URxvt.keysym.M-Delete:    perl:matcher:list
+URxvt.matcher.button:     1
+URxvt.matcher.pattern.1:  \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
+URxvt.matcher.pattern.2:  \\B(/\\S+?):(\\d+)(?=:|$)
+URxvt.matcher.launcher.2: gvim +$2 $1
+
+! This fixes Ctrl+Shift combo but loses the ability to input Unicode characters
+! which we will have with unichr
+! URxvt.iso14755: true
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! Bell
+URxvt*urgentOnBell: true
+
+! Clear: Control + Shift + l
+URxvt.keysym.Shift-Control-L: command:\033c
+URxvt.keysym.Control-Return: \033\015
+
+! -----------------------------------------------------------------------------
+! File: gruvbox-urxvt256.xresources
+! Description: Retro groove colorscheme generalized
+! Author: morhetz <morhetz@gmail.com>
+! Source: https://github.com/morhetz/gruvbox-generalized
+! Last Modified: 13 Dec 2013
+! -----------------------------------------------------------------------------
+
+! Background color & transparency (working with compton/picom)
+! URxvt.transparent: true
+! URxvt.shading: 20
+URxvt*depth: 32
+URxvt.background: rgba:2800/2800/2800/f800
+URxvt.foreground: #ebdbb2
+! URxvt.background: #282828
+
+
+! cursor
+URxvt.cursorColor: #689d6a
+
+! from gruvbox palette
+URxvt.color0: #282828
+URxvt.color1: #cc241d
+URxvt.color2: #98971a
+URxvt.color3: #d79921
+URxvt.color4: #458588
+URxvt.color5: #b16286
+URxvt.color6: #689d6a
+URxvt.color7: #a89984
+URxvt.color8: #928374
+URxvt.color9: #fb4934
+URxvt.color10: #b8bb26
+URxvt.color11: #fabd2f
+URxvt.color12: #83a598
+URxvt.color13: #d3869b
+URxvt.color14: #8ec07c
+URxvt.color15: #ebdbb2
+
+! I dont think these actually apply in any mean
+URxvt.color24:  #076678
+URxvt.color66:  #427b58
+URxvt.color88:  #9d0006
+URxvt.color96:  #8f3f71
+URxvt.color100: #79740e
+URxvt.color108: #8ec07c
+URxvt.color109: #83a598
+URxvt.color130: #af3a03
+URxvt.color136: #b57614
+URxvt.color142: #b8bb26
+URxvt.color167: #fb4934
+URxvt.color175: #d3869b
+URxvt.color208: #fe8019
+URxvt.color214: #fabd2f
+URxvt.color223: #ebdbb2
+URxvt.color228: #f2e5bc
+URxvt.color229: #fbf1c7
+URxvt.color230: #f9f5d7
+URxvt.color234: #1d2021
+URxvt.color235: #282828
+URxvt.color236: #32302f
+URxvt.color237: #3c3836
+URxvt.color239: #504945
+URxvt.color241: #665c54
+URxvt.color243: #7c6f64
+URxvt.color244: #928374
+URxvt.color245: #928374
+URxvt.color246: #a89984
+URxvt.color248: #bdae93
+URxvt.color250: #d5c4a1

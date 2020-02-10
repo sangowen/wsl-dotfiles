@@ -1,0 +1,14 @@
+#!/bin/bash
+export DISPLAY=$(dig +noall +answer $(hostname -s) | tail -1 | cut -f 5):0.0
+export XMODIFIERS=@im=gcin
+export GTK_IM_MODULE=gcin
+export QT_IM_MODULE=gcin
+export LIBGL_ALWAYS_INDIRECT=1
+export PULSE_SERVER=tcp:$(dig +noall +answer $(hostname -s) | tail -1 | cut -f 5)
+feh --bg-scale /home/wayne/DSC_1245.JPG
+i3 -c ~/.config/i3/config_preload > /dev/null 2>&1 &
+sleep 0.5
+xrdb -merge ~/.Xresources
+pkill i3
+sleep 0.5
+i3 -c ~/.config/i3/config_office >/dev/null &
